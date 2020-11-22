@@ -27,6 +27,10 @@
   },
   "dependencies": {
     "aedes": "^0.44.0",
-    "async-mqtt": "^2.6.1"
+    "async-mqtt": "^2.6.1",
+    "chalk": "^4.1.0",
+    "convict": "^6.0.0",
+    "cuid": "^2.1.8",
+    "serverline": "^1.5.0"
   }
 }

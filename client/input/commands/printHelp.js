@@ -4,7 +4,7 @@ import { commands } from "./index";
 export const printHelp = () => {
   console.log(
     chalk.yellow(
-      `Smart Lock Gateway Server v${process.env.npm_package_version}`
+      `Smart Lock Gateway Client v${process.env.npm_package_version}`
     )
   );
   console.log("Available commands:");
