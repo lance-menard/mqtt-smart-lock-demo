@@ -14,7 +14,15 @@ To start the application in "watch" mode (with automatic restarts on code change
 
 ## To do:
 
-- Implement client state and subscriptions for lock and unlock
-- Implement client commands to simulate manual lock and unlock with a key
-- Implement server commands for lock and unlock
-- Set up interval on server to look for lock clients that haven't checked in
+- Implement client state and subscriptions for lock and unlock (Sarah)
+- Implement client commands to simulate manual lock and unlock with a key (Sarah)
+- Implement server commands for lock and unlock (Tom)
+- Set up internal permanent & temporary password commands (set, clear, etc.) (Tom)
+- Set up interval on server to look for lock clients that haven't checked in (Tom)
+
+### Additional:
+
+- Implement TLS as an option for the broker (Lance)
+- Implement username/password auth for the broker (Lance)
+- Other security options?
+- Benchmarks
