@@ -12,6 +12,13 @@ Before development, install dependencies via `npm i`.
 
 To start the application in "watch" mode (with automatic restarts on code changes), simply run `npm run watch:server` or `npm run watch:client`.
 
+
+## Manual Lock/Unlock
+
+To manually unlock the door with a key run `manual_unlock`.
+To manually lock the door with a key run `manual_lock`.
+
+
 ## To do:
 
 - Implement client state and subscriptions for lock and unlock (Sarah)
