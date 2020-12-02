@@ -12,22 +12,33 @@ Before development, install dependencies via `npm i`.
 
 To start the application in "watch" mode (with automatic restarts on code changes), simply run `npm run watch:server` or `npm run watch:client`.
 
+## Server Commands
 
-## Manual Lock/Unlock
+### Lock/Unlcok
 
-To manually unlock the door with a key run `manual_unlock`.
-To manually lock the door with a key run `manual_lock`.
+- To lock the door (as if from a smartphone), run `lock <clientId> <password>`.
+- To unlock the door (as if from a smartphone), run `lock <clientId> <password>`.
 
+### Passwords
+
+- To change the primary admin password, run `changePass <new password> <current admin password>`
+  - The server starts with a default admin password of `guest`.
+- To set the temporary password, run `setTempPass <new temporary password> <admin password>`
+- To clear the temporary password, run `clearTempPass <admin password>`
+
+## Client Commands
+
+### Manual Lock/Unlock
+
+- To manually unlock the door with a key run `manual_unlock`.
+- To manually lock the door with a key run `manual_lock`.
 
 ## To do:
 
 - Implement client state and subscriptions for lock and unlock (Sarah)
-- Implement client commands to simulate manual lock and unlock with a key (Sarah)
-- Implement server commands for lock and unlock (Tom)
-- Set up internal permanent & temporary password commands (set, clear, etc.) (Tom)
 - Set up interval on server to look for lock clients that haven't checked in (Tom)
 
-### Additional:
+### Stretch goals:
 
 - Implement TLS as an option for the broker (Lance)
 - Implement username/password auth for the broker (Lance)

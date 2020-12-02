@@ -8,7 +8,6 @@ const { host, port } = config.get("mqtt");
 export const initializeBroker = async () => {
   const aedes = aedesFactory();
   const server = createServer(aedes.handle);
-
   server.listen(
     {
       host,
