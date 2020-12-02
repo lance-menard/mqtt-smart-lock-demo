@@ -13,5 +13,5 @@ export const main = async () => {
   await initializeBroker();
   const client = await initializeClient(mqttOptions);
   await initializeState({ client });
-  await initializeInput({ commands });
+  await initializeInput({ services: { client }, commands });
 };
