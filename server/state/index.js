@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { config } from "../config";
 
 const verbose = config.get("verbose");
+const checkIntervalSeconds = config.get("checkIntervalSeconds");
 
 let state = {
   passwordHash: "$2b$10$cw2ZNUvzw46vig7HFlUXu.UmHH7WXwMDrLmOygV9mvZ.Y4BlpHKn6",
@@ -59,6 +60,20 @@ const handleHeartbeat = async (services, topic, message) => {
   }
 };
 
+const checkHeartbeat = () => {
+  console.log('checking devices');
+
+var client;
+  // compare to value of the last heartbeat
+  for (client in state.clients) {
+    // console.log(Math.abs(new Date() - state.clients[client].lastHeartbeat));
+    if (Math.abs(new Date() - state.clients[client].lastHeartbeat) > checkIntervalSeconds * 1000) {
+      console.log('Lost heartbeat from ' + client)
+    }
+  }
+
+};
+
 export const getState = () => state;
 
 export const initializeState = async (services) => {
@@ -83,5 +98,7 @@ export const initializeState = async (services) => {
       qos: 1,
     }
   );
+
+  setInterval(() => checkHeartbeat(), checkIntervalSeconds * 1000);
   // TODO: Set up interval to check for devices that haven't checked in for a while
 };

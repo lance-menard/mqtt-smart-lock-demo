@@ -20,4 +20,10 @@ export const config = convict({
     format: Boolean,
     env: "VERBOSE",
   },
+  checkIntervalSeconds: {
+    doc: "The frequency at which to publish heartbeat messages.",
+    default: 7,
+    format: Number,
+    env: "CHECK_INTERVAL",
+  },
 });
