@@ -36,7 +36,6 @@ To start the application in "watch" mode (with automatic restarts on code change
 ## To do:
 
 - Implement client state and subscriptions for lock and unlock (Sarah)
-- Set up interval on server to look for lock clients that haven't checked in (Tom)
 
 ### Stretch goals:
 
@@ -44,3 +43,6 @@ To start the application in "watch" mode (with automatic restarts on code change
 - Implement username/password auth for the broker (Lance)
 - Other security options?
 - Benchmarks
+  - Run command (lock/unlock) 100 times with variable delay, track latency and overhead
+  - Impact of TLS on latency and overhead
+  - Test impact of running lock on energy-constrained device (mimic via VM)

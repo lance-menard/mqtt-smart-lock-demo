@@ -4,6 +4,7 @@
   "description": "Smart lock demo application using MQTT.",
   "main": "server/index.js",
   "scripts": {
+    "start:broker": "babel-node -- broker/index.js",
     "start:server": "babel-node -- server/index.js",
     "watch:server": "nodemon --exec babel-node -- server/index.js",
     "start:client": "babel-node -- client/index.js",
@@ -32,6 +33,7 @@
     "chalk": "^4.1.0",
     "convict": "^6.0.0",
     "cuid": "^2.1.8",
+    "lodash": "^4.17.20",
     "serverline": "^1.5.0"
   }
 }

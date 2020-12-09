@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import cuid from "cuid";
-import { config } from "../config";
+import { config } from "../../shared/config";
 
 const heartbeatIntervalSeconds = config.get("heartbeatIntervalSeconds");
 const verbose = config.get("verbose");
@@ -10,7 +10,6 @@ export const CLIENT_ID = process.argv[2] || cuid();
 const state = {
   broken: false,
   locked: true,
-  statusChanged: false,
 };
 
 export const getState = () => state;
@@ -24,18 +23,6 @@ const sendHeartbeat = async ({ client }) => {
     await client.publish(`device/heartbeat/${CLIENT_ID}`, "", {
       qos: 0,
     });
-
-    if (state.statusChanged === true) {
-      state.statusChanged = false;
-      console.log(`Door is ${state.locked ? "locked" : "unlocked"}.`);
-      await client.publish(
-        `device/lockstate/${CLIENT_ID}`,
-        state.locked.toString(),
-        {
-          qos: 1,
-        }
-      );
-    }
   } else {
     if (verbose) {
       console.log("Skipping heartbeat (I'm broken!)");
@@ -65,10 +52,26 @@ const sendLockStatus = async ({ client }) => {
     );
 
     console.log(
-      `Publishing lock status ${chalk.green(
-        state.locked ? "locked" : "unlocked"
-      )} in response to command.`
+      `Publishing lock status ${
+        state.locked ? chalk.green("locked") : chalk.red("unlocked")
+      }.`
     );
+  }
+};
+
+export const lock = async ({ client }) => {
+  if (!state.broken) {
+    console.log(`${chalk.green("Locking")} door.`);
+    state.locked = true;
+    await sendLockStatus({ client });
+  }
+};
+
+export const unlock = async ({ client }) => {
+  if (!state.broken) {
+    console.log(`${chalk.red("Unlocking")} door.`);
+    state.locked = false;
+    await sendLockStatus({ client });
   }
 };
 
@@ -77,7 +80,13 @@ export const initializeState = async ({ client }) => {
     sendLockStatus({ client })
   );
 
-  await registerClient({ client });
+  await client.subscribeWithHandler(`device/command/lock/${CLIENT_ID}`, () =>
+    lock({ client })
+  );
 
-  // TODO: Implement MQTT subscriber to listen for lock & unlock commands
+  await client.subscribeWithHandler(`device/command/unlock/${CLIENT_ID}`, () =>
+    unlock({ client })
+  );
+
+  await registerClient({ client });
 };

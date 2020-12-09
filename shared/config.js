@@ -13,6 +13,12 @@ export const config = convict({
       default: 1883,
       env: "MQTT_PORT",
     },
+    enableTls: {
+      doc: "Whether to enable TLS encryption for communication.",
+      format: Boolean,
+      default: false,
+      env: "MQTT_ENABLE_TLS",
+    },
   },
   verbose: {
     doc: "Whether to include verbose logging.",
@@ -20,9 +26,9 @@ export const config = convict({
     format: Boolean,
     env: "VERBOSE",
   },
-  checkIntervalSeconds: {
+  heartbeatIntervalSeconds: {
     doc: "The frequency at which to publish heartbeat messages.",
-    default: 7,
+    default: 5,
     format: Number,
     env: "CHECK_INTERVAL",
   },
