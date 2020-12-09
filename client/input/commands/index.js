@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { getState } from "../../state";
+import { getState, lock, unlock } from "../../state";
 import { printHelp } from "./printHelp";
 
 export const commands = {
@@ -23,22 +23,18 @@ export const commands = {
       console.log(chalk.red("Smashed lock with a hammer."));
     },
   },
-  manual_lock: {
-    description: "Door has been manually locked.",
-    handle: () => {
-      const state = getState();
-      state.locked = true;
-      state.statusChanged = true;
-      console.log(chalk.yellow("Door has been manually locked with a key"));
+  lock: {
+    description: "Manually locks the door.",
+    handle: async ({ client }) => {
+      await lock({ client });
+      console.log(chalk.yellow("Door has been manually locked with a key."));
     },
   },
-  manual_unlock: {
-    description: "Door has been manually unlocked.",
-    handle: () => {
-      const state = getState();
-      state.locked = false;
-      state.statusChanged = true;
-      console.log(chalk.yellow("Door has been manually unlocked with a key"));
+  unlock: {
+    description: "Manually unlocks the door.",
+    handle: async ({ client }) => {
+      await unlock({ client });
+      console.log(chalk.yellow("Door has been manually unlocked with a key."));
     },
   },
   fix: {

@@ -2,7 +2,7 @@ import { initializeClient } from "../../shared/client";
 import { commands } from "../input";
 import { initializeInput } from "../../shared/input";
 import { initializeState } from "../state";
-import { config } from "../config";
+import { config } from "../../shared/config";
 
 const mqttOptions = config.get("mqtt");
 

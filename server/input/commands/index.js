@@ -5,6 +5,7 @@ import {
   clearTemporaryPassword,
 } from "./passwords";
 import { lock, unlock } from "./lock";
+import { benchmark, stopBenchmark } from "./benchmarks";
 
 export const commands = {
   help: {
@@ -18,7 +19,6 @@ export const commands = {
       process.exit(0);
     },
   },
-  // TODO: Implement server commands:
   // Lock & unlock given the correct password (permanent or temporary)
   lock: {
     description:
@@ -45,5 +45,15 @@ export const commands = {
     description:
       "Clears the temporary password that can be used to lock or unlock the device once.\n\t\t\tUsage: clearTemporaryPassword <currentPassword>",
     handle: clearTemporaryPassword,
+  },
+  // Benchmarks and testing.
+  bench: {
+    description:
+      "Runs a command repeatedly, measuring latency over time.\n\t\t\tUsage: bench [rounds] [delay] [type] [clientId]\n\t\t\tExample: bench 100 100",
+    handle: benchmark,
+  },
+  stop: {
+    description: "Stops the current benchmark run.",
+    handle: stopBenchmark,
   },
 };
