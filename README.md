@@ -32,17 +32,3 @@ To start the application in "watch" mode (with automatic restarts on code change
 
 - To manually unlock the door with a key run `manual_unlock`.
 - To manually lock the door with a key run `manual_lock`.
-
-## To do:
-
-- Implement client state and subscriptions for lock and unlock (Sarah)
-
-### Stretch goals:
-
-- Implement TLS as an option for the broker (Lance)
-- Implement username/password auth for the broker (Lance)
-- Other security options?
-- Benchmarks
-  - Run command (lock/unlock) 100 times with variable delay, track latency and overhead
-  - Impact of TLS on latency and overhead
-  - Test impact of running lock on energy-constrained device (mimic via VM)
