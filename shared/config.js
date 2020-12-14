@@ -19,6 +19,18 @@ export const config = convict({
       default: false,
       env: "MQTT_ENABLE_TLS",
     },
+    username: {
+      doc: "Whether to enable TLS encryption for communication.",
+      format: String,
+      default: "mqtt",
+      env: "MQTT_USERNAME",
+    },
+    password: {
+      doc: "The password to use for the MQTT broker.",
+      format: String,
+      default: "N@1z$2#bdiA4",
+      env: "MQTT_PASSWORD",
+    },
   },
   verbose: {
     doc: "Whether to include verbose logging.",

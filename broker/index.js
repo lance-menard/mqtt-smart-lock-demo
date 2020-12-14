@@ -6,7 +6,7 @@ import tls from "tls";
 import { readFileSync } from "fs";
 import { config } from "../shared/config";
 
-const { port, enableTls } = config.get("mqtt");
+const { port, enableTls, username, password } = config.get("mqtt");
 
 const options = {
   key: readFileSync(path.join(__dirname, "privateKey.key")),
@@ -15,6 +15,13 @@ const options = {
 
 const initializeBroker = async () => {
   const aedes = aedesFactory();
+
+  if (username) {
+    aedes.authenticate = function (client, user, pass, callback) {
+      callback(null, user === username && pass.toString() === password);
+    };
+  }
+
   const serverCore = enableTls ? tls : net;
   const server = serverCore.createServer(options, aedes.handle);
   server.listen(

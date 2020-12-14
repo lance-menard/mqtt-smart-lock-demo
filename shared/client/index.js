@@ -3,10 +3,18 @@ import mqtt from "async-mqtt";
 const transformTopicToRegex = (topic) =>
   new RegExp(topic.replace(/\+/g, "[\\w\\d]+?").replace(/#/g, ".*"));
 
-export const initializeClient = async ({ host, port, enableTls }) => {
+export const initializeClient = async ({
+  host,
+  port,
+  username,
+  password,
+  enableTls,
+}) => {
   const client = await mqtt.connectAsync({
     host,
     port,
+    username,
+    password,
     protocol: enableTls ? "mqtts" : "mqtt",
     rejectUnauthorized: false,
   });
